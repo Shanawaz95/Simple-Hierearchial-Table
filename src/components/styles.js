@@ -2,22 +2,20 @@ import styled from 'styled-components';
 
 const Container = styled.div`
   padding: 2rem;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background-color: #f5f5f5;
   min-height: 100vh;
 `
 
 const Table = styled.table`
   width: 100%;
-  border-collapse: collapse;
   background-color: white;
-  border-radius: 8px;
+  border-radius: 4px;
   overflow: hidden;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 `
 
 const TableHeader = styled.thead`
-  background-color: #4a90e2;
+  background-color:rgb(163, 177, 194);
   color: white;
 `
 
@@ -41,7 +39,6 @@ const TableRow = styled.tr`
 `
 
 const ParentRow = styled(TableRow)`
-  background-color: #e8f5e8;
   font-weight: 600;
   
   &:hover {
@@ -127,43 +124,6 @@ const Button = styled.button`
   cursor: pointer;
   font-size: 0.75rem;
   font-weight: 500;
-  transition: background-color 0.2s ease;
-  
-  ${props => props.variant === 'add' && `
-    background-color: #28a745;
-    color: white;
-    
-    &:hover {
-      background-color: #218838;
-    }
-  `}
-  
-  ${props => props.variant === 'delete' && `
-    background-color: #dc3545;
-    color: white;
-    
-    &:hover {
-      background-color: #c82333;
-    }
-  `}
-  
-  ${props => props.variant === 'button1' && `
-    background-color: #007bff;
-    color: white;
-    
-    &:hover {
-      background-color: #0056b3;
-    }
-  `}
-  
-  ${props => props.variant === 'button2' && `
-    background-color: #6c757d;
-    color: white;
-    
-    &:hover {
-      background-color: #545b62;
-    }
-  `}
 `
 
 const CalculatedValue = styled.span`

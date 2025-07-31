@@ -40,14 +40,12 @@ const TABLE_COLUMNS = [
     header: "Allocation %",
     type: "button",
     buttonText: "Button 1",
-    buttonVariant: "button1",
   },
   {
     id: "allocationValue",
     header: "Allocation Val",
     type: "button",
     buttonText: "Button 2",
-    buttonVariant: "button2",
   },
   {
     id: "variance",

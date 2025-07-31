@@ -16,7 +16,7 @@ const TableCellComponent = ({
   row,
   isParent,
   isChild,
-  parentId,
+  value,
   onValueChange,
   onButtonClick,
 }) => {
@@ -29,19 +29,18 @@ const TableCellComponent = ({
         return (
           <Input
             type="number"
-            value={row.value}
-            onChange={(e) => onValueChange(parentId, row.id, e.target.value)}
-            min="0"
-            step="1"
-            disabled={isParent}
+            value={value?.[row.id]}
+            onChange={(e) => onValueChange(e.target.value, row.id)}
+            placeholder="Enter value"
           />
         );
 
       case "button":
         return (
           <Button
+            variant={column.buttonVariant}
             onClick={() =>
-              onButtonClick && onButtonClick(column.id, row.id, parentId)
+              onButtonClick && onButtonClick(column.id, row.id, isParent)
             }
             title={`${column.buttonText} for ${row.label}`}
           >
@@ -54,7 +53,15 @@ const TableCellComponent = ({
     }
   };
 
-  return <TableCell $isChild={isChild}>{renderCellContent()}</TableCell>;
+  return (
+    <TableCell
+      style={{
+        paddingLeft: column.id === "label" && isChild ? "2rem" : "1rem",
+      }}
+    >
+      {renderCellContent()}
+    </TableCell>
+  );
 };
 
 function HierarchicalTable({ data, columns, onValueChange, onButtonClick }) {
@@ -71,7 +78,6 @@ function HierarchicalTable({ data, columns, onValueChange, onButtonClick }) {
         <tbody>
           {data.rows.map((row) => (
             <React.Fragment key={row.id}>
-              {/* Parent Row */}
               <ParentRow>
                 {columns.map((column) => (
                   <TableCellComponent
@@ -86,7 +92,6 @@ function HierarchicalTable({ data, columns, onValueChange, onButtonClick }) {
                 ))}
               </ParentRow>
 
-              {/* Children Rows */}
               {row.children &&
                 row.children.map((child) => (
                   <ChildRow key={child.id}>

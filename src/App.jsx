@@ -32,7 +32,7 @@ function App() {
           return {
             ...row,
             children: updatedChildren,
-            value: calculateParentValue(updatedChildren), // ✅ Recalculate parent
+            value: calculateParentValue(updatedChildren),
           };
         }
         return row;

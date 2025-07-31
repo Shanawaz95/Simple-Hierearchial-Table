@@ -64,7 +64,13 @@ const TableCellComponent = ({
   );
 };
 
-function HierarchicalTable({ data, columns, onValueChange, onButtonClick }) {
+function HierarchicalTable({
+  data,
+  columns,
+  value,
+  onValueChange,
+  onButtonClick,
+}) {
   return (
     <Container>
       <Table>
@@ -86,6 +92,7 @@ function HierarchicalTable({ data, columns, onValueChange, onButtonClick }) {
                     row={row}
                     isParent={true}
                     isChild={false}
+                    value={value}
                     onValueChange={onValueChange}
                     onButtonClick={onButtonClick}
                   />
@@ -103,6 +110,7 @@ function HierarchicalTable({ data, columns, onValueChange, onButtonClick }) {
                         isParent={false}
                         isChild={true}
                         parentId={row.id}
+                        value={value}
                         onValueChange={onValueChange}
                         onButtonClick={onButtonClick}
                       />

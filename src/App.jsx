@@ -11,20 +11,32 @@ function App() {
     },
     [inputValue]
   );
-  console.log(data);
+
+  const calculateParentValue = (children) => {
+    return children.reduce((sum, child) => sum + (child.value || 0), 0);
+  };
 
   const handleAllocationValueClick = (rowId, isParent) => {
+    if (!inputValue[rowId]) return;
+
     setData((prevData) => ({
       ...prevData,
-      rows: prevData.rows.map((row) => ({
-        ...row,
-        value:
-          isParent && inputValue?.[row.id] ? inputValue?.[row.id] : row.value,
-        children: row.children.map((child) => ({
-          ...child,
-          value: child.id === rowId ? inputValue[child.id] : child.value,
-        })),
-      })),
+      rows: prevData.rows.map((row) => {
+        if (isParent && row.id === rowId) {
+          return { ...row, value: inputValue[rowId] };
+        } else if (row.children) {
+          const updatedChildren = row.children.map((child) => ({
+            ...child,
+            value: child.id === rowId ? inputValue[rowId] : child.value,
+          }));
+          return {
+            ...row,
+            children: updatedChildren,
+            value: calculateParentValue(updatedChildren), // ✅ Recalculate parent
+          };
+        }
+        return row;
+      }),
     }));
   };
 
